@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
 import { Post } from 'src/modules/post/domain/entities/Post';
+import { Reaction } from 'src/modules/post/domain/entities/reaction.entity';
 import { IUser } from 'src/modules/users/domain/entities/IUser';
 import { v4 } from 'uuid';
 
@@ -14,7 +15,8 @@ class PostSchemas extends Post {
   comments: string[];
   @Prop({ type: String, required: true })
   content: string;
-  @Prop({ type: String, required: false })
-  reactions: number;
+  @Prop({ type: [Reaction], required: false, ref: 'User' })
+  reactions: Reaction[];
+
 }
 export const PostModel = SchemaFactory.createForClass(PostSchemas)

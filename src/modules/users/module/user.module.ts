@@ -22,6 +22,10 @@ import { PostModule } from 'src/modules/post/module/post.module';
     {provide: 'InterfaceUserRepository', useClass: UserRepository},
     UserServices,
     LoginUserService,
+  ],
+  exports:[
+    {provide: 'InterfaceUserRepository', useClass: UserRepository},
+
   ]
 })
 export class UserModule{}

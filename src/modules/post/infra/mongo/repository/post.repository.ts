@@ -13,6 +13,12 @@ export class PostRepository implements InterfacePostRepository{
     @InjectModel('Post')
     private model: Model<Post>
   ){}
+ async update(id: string, post: Post): Promise<void> {
+    await this.model.updateOne({id : id}, post)
+  }
+  async findById(id: string): Promise<Post | null> {
+    return await this.model.findOne({id: id})
+  }
 
   async findAll(): Promise<Post[]> {
     return await this.model.find();

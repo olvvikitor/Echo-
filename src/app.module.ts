@@ -19,5 +19,6 @@ import { PostModule } from './modules/post/module/post.module';
     
   ],
   providers: [MongoConfigConnection],
+  
 })
 export class AppModule {}
