@@ -1,0 +1,29 @@
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Mode } from 'fs';
+import { Model } from 'mongoose';
+import { CreatePostDto } from 'src/modules/post/domain/entities/create-post-dto';
+import { Post } from 'src/modules/post/domain/entities/Post';
+import { InterfacePostRepository } from 'src/modules/post/domain/repositories/InterfacePostRepository';
+
+@Injectable()
+export class PostRepository implements InterfacePostRepository{
+
+  constructor(
+    @InjectModel('Post')
+    private model: Model<Post>
+  ){}
+
+  async findAll(): Promise<Post[]> {
+    return await this.model.find();
+  }
+
+  async findAllByIdUser(id: string): Promise<Post[]> {
+    return await this.model.find({author: id})
+  }
+
+  async create(post: CreatePostDto): Promise<void> {
+    (await this.model.create(post)).save()
+  }
+  
+}

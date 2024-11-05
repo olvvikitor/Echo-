@@ -6,7 +6,7 @@ import { v4 } from 'uuid';
 
 @Schema()
 class UserSchema implements IUser {
-  @Prop({type: Types.ObjectId, require: false, default: ()=> v4()})
+  @Prop({type: Types.UUID, require: false, default: ()=> v4()})
   id: string;
   @Prop({ type: String, required: true })
   email: string;

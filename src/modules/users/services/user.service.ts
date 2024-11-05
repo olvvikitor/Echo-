@@ -12,9 +12,7 @@ constructor(
   private userRepository: InterfaceUserRepository,
   @Inject('InterfaceHashProvider')
   private hashProvider:InterfaceHashProvider
-
 ){}
-
   async createUser(user: CreateUserDto):Promise<ViewUserDto>{
     const exists = await this.userRepository.findByEmail(user.email);
 
