@@ -24,15 +24,15 @@ export class UserControllers{
     return await this.userService.findById(id)
   }
   
-  @Get('/profile')
-  public async getProfile(@Req() request: any){
+  // @Get('/profile')
+  // public async getProfile(@Req() request: any){
 
-    if(!request.user){
-       throw new UnauthorizedException
-    }
-    const posts = await this.postservice.findAll(request.user.payload.id)
+  //   if(!request.user){
+  //      throw new UnauthorizedException
+  //   }
+  //   const posts = await this.postservice.findAll(request.user.payload.id)
 
-    return posts
+  //   return posts
     
-  }
+  // }
 }

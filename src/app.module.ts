@@ -5,6 +5,7 @@ import { MongoConfigConnection } from './configs/mongo/mongo.config';
 import { UserModule } from './modules/users/module/user.module';
 import { ProvidersModule } from './shared/providers/modules/providers.module';
 import { PostModule } from './modules/post/module/post.module';
+import { ReactionModule } from './modules/reaction/module/reaction.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { PostModule } from './modules/post/module/post.module';
       useClass:MongoConfigConnection
     }),
     UserModule,
-    PostModule
+    PostModule,
+    ReactionModule
     
   ],
   providers: [MongoConfigConnection],
