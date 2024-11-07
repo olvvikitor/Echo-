@@ -1,17 +1,17 @@
-import { IUser } from 'src/modules/users/domain/entities/IUser';
-import { Reaction } from './reactions/reaction.entity';
+import { Reaction } from 'src/modules/reaction/domain/entities/reaction.entity';
+import { User } from 'src/modules/users/domain/entities/User';
 
 export class Post {
   id: string;
   content: string;
-  author!: IUser;
+  author!: User;
   comments: string[];
   reactions: Reaction[];
 
   constructor(
     id: string = '', // Se não fornecido, 'id' será uma string vazia
     content: string = '', // Se não fornecido, 'content' será uma string vazia
-    author: IUser, // 'author' deve ser fornecido
+    author: User, // 'author' deve ser fornecido
     comments: string[] = [], // 'comments' é inicializado como um array vazio
     reactions: Reaction[] = [] // 'reactions' é inicializado como um array vazio
   ) {

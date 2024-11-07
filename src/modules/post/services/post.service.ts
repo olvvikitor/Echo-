@@ -3,7 +3,6 @@ import { InterfacePostRepository } from '../domain/repositories/InterfacePostRep
 import { CreatePostDto } from '../domain/entities/create-post-dto';
 import { Post } from '../domain/entities/Post';
 import { InterfaceUserRepository } from 'src/modules/users/domain/repositories/interface.user.repository';
-import { Reaction } from '../domain/entities/reactions/reaction.entity';
 
 @Injectable()
 export class PostService{

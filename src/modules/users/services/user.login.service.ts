@@ -21,10 +21,6 @@ export class LoginUserService{
     if(!user){
       throw new AppError('Email não cadastrado')
     }
-    const nome = () => {
-      return 2
-    }
-
 
     if(! await this.hashProvider.compareHash(loginDto.password, user.password)){
       throw new AppError('Email ou senha inválido')

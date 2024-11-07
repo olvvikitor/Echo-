@@ -1,7 +1,8 @@
 import {IsNotEmpty } from 'class-validator'
+import { v4 } from 'uuid'
 
 export class Reaction {
-  
+  id: string
   @IsNotEmpty()
   id_post : string
   @IsNotEmpty()
@@ -12,6 +13,7 @@ export class Reaction {
   type: 'negative' | 'positive'
 
   constructor(idPost:string , idUser: string, data : Date, type: 'negative' | 'positive') {
+    this.id = v4()
     this.id_post = idPost
     this.data = data,
     this.type = type,

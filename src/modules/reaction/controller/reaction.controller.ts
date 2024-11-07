@@ -1,5 +1,5 @@
 import { Reaction } from '../domain/entities/reaction.entity';
-import { UpdateReactionDto } from '../domain/entities/reaction.entity copy';
+import { UpdateReactionDto } from '../domain/dtos/reaction-update-dto';
 import { Body, Controller, Inject, Injectable, Param, Put, Req, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { ReactionService } from '../services/reactions.service';
 import { AuthGuard } from 'src/shared/middleweres/auth.guard';
@@ -24,13 +24,8 @@ export class ReactionController{
     
     const idUser : string = request.user.payload.id
 
-    const newReaction: Reaction = {
-      data : new Date(),
-      id_post : id,
-      id_user : idUser,
-      type: reaction.type
-    }
-
+    const newReaction: Reaction = new Reaction(id, idUser, new Date(), reaction.type)
+     
     return await this.reactionService.updateReaction(id, newReaction)
   }
 }

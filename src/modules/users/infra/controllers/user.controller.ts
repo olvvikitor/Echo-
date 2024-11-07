@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Inject, Injectable, Param, Post, Req, UnauthorizedException, UseGuards } from '@nestjs/common';
-import { IUser } from '../../domain/entities/IUser';
+import { User } from '../../domain/entities/User';
 import { UserServices } from '../../services/user.service';
 import { AuthGuard } from 'src/shared/middleweres/auth.guard';
 import { PostService } from 'src/modules/post/services/post.service';
@@ -16,7 +16,7 @@ export class UserControllers{
   ){}
 
   @Post()
-  public async create(@Body() user: IUser){
+  public async create(@Body() user: User){
     return await this.userService.createUser(user)
   }
   @Get('/profile/:id')
