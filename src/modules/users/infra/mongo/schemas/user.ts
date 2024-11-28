@@ -5,7 +5,9 @@ import { v4 } from 'uuid';
 
 
 @Schema()
-class UserSchema extends User {
+class UserSchema implements User {
+  @Prop({ type: String, required: true })
+  name!: string;
   @Prop({type: Types.UUID, require: false, default: ()=> v4()})
   id!: string;
   @Prop({ type: String, required: true })

@@ -1,9 +1,15 @@
+import { OmitType } from '@nestjs/mapped-types'
+import { Post } from './Post'
+import { Foto } from 'src/modules/fotos/domain/entities/foto'
 
-export class CreatePostDto{
+export class CreatePostDto extends OmitType(Post,['id', 'comments', 'reactions', 'author']){
   content: string
-  author? : string
-  constructor(content: string, author : string){
+  id_author: string
+  photos: Foto[]
+  constructor(content: string, id_author : string){
+    super()
     this.content = content
-    this.author = author
+    this.id_author = id_author
+    this.photos = []
   }
 }

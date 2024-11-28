@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { InterfaceTokenProvider } from '../providers/interfaces/interface.token.provider';
+import { InterfaceTokenProvider } from '../entities/providers/token/interface.token.provider';
 import { Request } from 'express';
 
 @Injectable()

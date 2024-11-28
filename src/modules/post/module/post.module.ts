@@ -2,10 +2,12 @@ import { Module,forwardRef  } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PostModel } from '../infra/mongo/schemas/post';
 import { PostRepository } from '../infra/mongo/repository/post.repository';
-import { PostController } from '../controllers/post.controller';
 import { ProvidersModule } from 'src/shared/providers/modules/providers.module';
 import { PostService } from '../services/post.service';
 import { UserModule } from 'src/modules/users/module/user.module';
+import { PostController } from '../infra/controllers/post.controller';
+import { StorageModule } from 'src/shared/providers/storage/storage.module';
+import { FotoModule } from 'src/modules/fotos/module/foto.modele';
 
 @Module({
   imports:[
@@ -13,8 +15,9 @@ import { UserModule } from 'src/modules/users/module/user.module';
       name: 'Post', schema: PostModel
     }]),
     ProvidersModule,
-    forwardRef(()=>UserModule)
-    
+    forwardRef(()=>UserModule),
+    StorageModule,
+    FotoModule
   ],
   controllers:[PostController],
   providers:[

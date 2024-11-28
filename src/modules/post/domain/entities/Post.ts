@@ -1,24 +1,40 @@
+import { IsArray, IsNotEmpty, IsObject, IsString, IsUUID } from 'class-validator';
+import { Foto } from 'src/modules/fotos/domain/entities/foto';
 import { Reaction } from 'src/modules/reaction/domain/entities/reaction.entity';
+import { ViewUserDto } from 'src/modules/users/domain/entities/dtos/view-user-dto';
 import { User } from 'src/modules/users/domain/entities/User';
+import { v4 } from 'uuid';
 
 export class Post {
-  id: string;
+
+  @IsUUID()
+  @IsNotEmpty()
+  id = v4();
+
+  @IsString()
+  @IsNotEmpty()
   content: string;
-  author!: User;
-  comments: string[];
-  reactions: Reaction[];
+
+  @IsObject()
+  @IsNotEmpty()
+  author: ViewUserDto;
+
+  @IsArray()
+  comments: string[] = [];
+
+  @IsArray()
+  reactions: Reaction[] = [];
+
+  @IsArray()
+  photos: Foto[] = []
 
   constructor(
-    id: string = '', // Se não fornecido, 'id' será uma string vazia
-    content: string = '', // Se não fornecido, 'content' será uma string vazia
-    author: User, // 'author' deve ser fornecido
-    comments: string[] = [], // 'comments' é inicializado como um array vazio
-    reactions: Reaction[] = [] // 'reactions' é inicializado como um array vazio
+    content: string = '', 
+    author: ViewUserDto, 
+
   ) {
-    this.id = id;
     this.content = content;
     this.author = author; // Autor é obrigatório e deve ser passado no construtor
-    this.comments = comments; // Array de comentários opcional
-    this.reactions = reactions; // Array de reações opcional
+
   }
 }

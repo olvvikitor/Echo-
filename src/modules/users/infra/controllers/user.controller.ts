@@ -1,22 +1,18 @@
 import { Body, Controller, Get, Inject, Injectable, Param, Post, Req, UnauthorizedException, UseGuards } from '@nestjs/common';
-import { User } from '../../domain/entities/User';
 import { UserServices } from '../../services/user.service';
-import { AuthGuard } from 'src/shared/middleweres/auth.guard';
-import { PostService } from 'src/modules/post/services/post.service';
+
+import { CreateUserDto } from '../../domain/entities/dtos/create-user-dto';
 
 @Injectable()
 @Controller('user')
-@UseGuards(AuthGuard)
 export class UserControllers{
   constructor(
     @Inject()
     private userService : UserServices,
-    @Inject()
-    private postservice: PostService
   ){}
 
   @Post()
-  public async create(@Body() user: User){
+  public async create(@Body() user: CreateUserDto){
     return await this.userService.createUser(user)
   }
   @Get('/profile/:id')

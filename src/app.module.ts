@@ -6,6 +6,7 @@ import { UserModule } from './modules/users/module/user.module';
 import { ProvidersModule } from './shared/providers/modules/providers.module';
 import { PostModule } from './modules/post/module/post.module';
 import { ReactionModule } from './modules/reaction/module/reaction.module';
+import { StorageModule } from './shared/providers/storage/storage.module';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { ReactionModule } from './modules/reaction/module/reaction.module';
     }),
     UserModule,
     PostModule,
-    ReactionModule
+    ReactionModule,
     
   ],
   providers: [MongoConfigConnection],

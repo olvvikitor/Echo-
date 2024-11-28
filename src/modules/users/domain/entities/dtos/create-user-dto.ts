@@ -1,16 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator'
+import { User } from '../User'
+import { OmitType } from '@nestjs/mapped-types'
 
-export class CreateUserDto{
-
-  @IsEmail()
-  @IsNotEmpty()
-  email: string
-  @IsString()
-  @IsNotEmpty()
-  password: string
-  
-  constructor(id:string, email:string, password:string){
-    this.email = email,
-    this.password = password
-  }
-}
+export class CreateUserDto extends OmitType(User, ['id']){}

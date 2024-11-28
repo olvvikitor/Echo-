@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InterfaceUserRepository } from '../domain/repositories/interface.user.repository';
 import { CreateUserDto } from '../domain/entities/dtos/create-user-dto';
-import { InterfaceHashProvider } from 'src/shared/providers/interfaces/InterfaceHashProvider';
+import { InterfaceHashProvider } from 'src/shared/entities/providers/bcrypt/InterfaceHashProvider';
 import { ViewUserDto } from '../domain/entities/dtos/view-user-dto';
 import AppError from 'src/shared/errors/app.error';
+import { User } from '../domain/entities/User';
 
 @Injectable()
 export class UserServices {
@@ -23,10 +24,12 @@ constructor(
     const passwordHash = await this.hashProvider.generateHash(user.password);
     user.password = passwordHash
 
-    const userCreated = await this.userRepository.create(user)
+    const userCreated = new User(user.name, user.email, user.password);
+    await this.userRepository.create(userCreated)
 
     const userDto:ViewUserDto = {
       id: userCreated.id,
+      name: userCreated.name,
       email: userCreated.email,
     }
 
@@ -39,6 +42,7 @@ constructor(
       throw new AppError('Usuario não encontrado')
     } 
     const userDto:ViewUserDto ={
+      name: user.name,
       email:user.email,
       id: user.id
     }

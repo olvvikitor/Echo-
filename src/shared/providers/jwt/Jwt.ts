@@ -1,5 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
-import { InterfaceTokenProvider } from '../interfaces/interface.token.provider';
+import { InterfaceTokenProvider } from '../../entities/providers/token/interface.token.provider';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
