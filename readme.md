@@ -1,63 +1,122 @@
+# Echo API - README
 
-### Passo 1: **Planejamento do Projeto**
-   - **Defina as Funcionalidades**: Escreva uma lista de funcionalidades principais e secundárias, como cadastro de usuários, criação de posts, reações, comentários e moderação.
-   - **Modelagem do Banco de Dados**: Faça um esquema para definir entidades e relacionamentos (Usuário, Post, Reação, Comentário, Notificação). Por exemplo:
-      - **Usuário**: nome, email, senha, pontuação
-      - **Post**: conteúdo, autor, data de criação
-      - **Reação**: tipo (positiva/negativa), post, autor
-   - **Escolha as Tecnologias**: Sugestão — NestJS para o backend, PostgreSQL ou MongoDB como banco de dados, Vue.js ou React para o frontend.
+## 📚 **Descrição**
+A **Echo API** é uma API RESTful desenvolvida como parte do aprendizado de **NestJS**. Ela serve como backend para uma rede social chamada **Echo**, oferecendo funcionalidades como autenticação de usuários, gerenciamento de imagens, sistema de curtidas e comentários. O projeto utiliza **MongoDB** como banco de dados, com o auxílio do **Mongoose** para modelagem.
 
-### Passo 2: **Configuração do Ambiente de Desenvolvimento**
-   - **Crie o Backend**: Use NestJS para o backend. Configure o ambiente inicial:
-      ```bash
-      nest new social-network
-      ```
-   - **Instale Dependências**: Instale pacotes essenciais, como TypeORM (para bancos relacionais) ou Mongoose (para MongoDB), e outras dependências como bcrypt e JWT para autenticação.
-      ```bash
-      npm install @nestjs/typeorm typeorm bcrypt jsonwebtoken
-      ```
-   - **Configuração do Banco de Dados**: Configure o banco no `.env` e conecte-o ao NestJS.
+---
 
-### Passo 3: **Desenvolvimento do Sistema de Usuários e Autenticação**
-   - **Crie o Módulo de Usuários**: Implemente registro, login e recuperação de senha.
-   - **Autenticação JWT**: Configure uma estratégia JWT para autenticação nas rotas protegidas.
-   - **Controle de Sessão**: Defina as permissões para rotas (exemplo: apenas usuários autenticados podem reagir ou comentar).
+## 🚀 **Funcionalidades**
+- **Autenticação JWT**:
+  - Registro e login de usuários com tokens JWT para controle de acesso.
+- **Armazenamento de Imagens no AWS S3**:
+  - Upload de imagens de perfil e postagens diretamente para um bucket S3.
+- **Sistema de Curtidas e Comentários**:
+  - Reações e comentários em postagens.
+- **Gerenciamento de Postagens**:
+  - Criar, editar e excluir postagens.
+- **Perfil de Usuário**:
+  - Atualização de informações do perfil e exibição de dados públicos.
+- **Feed de Postagens**:
+  - Listagem de postagens recentes ou populares.
 
-### Passo 4: **Desenvolvimento de Posts e Comentários**
-   - **Módulo de Posts**: Crie CRUD para posts, onde os usuários podem criar, editar e deletar.
-   - **Módulo de Comentários**: Adicione CRUD para comentários que pertencem a um post específico.
-   - **Validação e Segurança**: Use `class-validator` e proteja as rotas.
+---
 
-### Passo 5: **Implementação das Reações**
-   - **Tabela de Reações**: Cada reação deve ser associada a um usuário e a um post, com um tipo (positiva ou negativa).
-   - **Endpoints de Reação**: Crie endpoints para adicionar ou remover reações. Verifique se o usuário já reagiu para impedir múltiplas reações iguais.
-   - **Moderação Automática de Reações**: Implemente um limite de reações negativas, e um sistema de alerta se o post receber muitas reações negativas.
+## 🛠️ **Tecnologias Utilizadas**
+- **Linguagem**: TypeScript
+- **Framework**: NestJS
+- **Banco de Dados**: MongoDB (com Mongoose)
+- **Armazenamento**: AWS S3
+- **Autenticação**: JWT (JSON Web Token)
+- **Bibliotecas Adicionais**:
+  - `@nestjs/mongoose` para integração com MongoDB.
+  - `@nestjs/jwt` para autenticação.
+  - `aws-sdk` para comunicação com o S3.
 
-### Passo 6: **Sistema de Pontuação e Feedback do Usuário**
-   - **Pontos por Ações**: Defina uma regra de pontuação para ações construtivas e penalidades para ações negativas.
-   - **Ranking de Usuários**: Crie um ranking ou perfil de reputação com base nas reações dos usuários.
+---
 
-### Passo 7: **Notificações e Atualizações em Tempo Real**
-   - **WebSockets**: Implemente WebSockets com NestJS para notificações em tempo real (ex.: quando alguém reage ao seu post ou comenta).
-   - **Notificações**: Configure um sistema de notificações para alertar os usuários quando suas postagens ou comentários recebem reações.
+## 🏗️ **Estrutura do Projeto**
+```plaintext
+src/
+├── auth/              # Módulo de autenticação e geração de tokens
+├── users/             # Módulo de gerenciamento de usuários
+├── posts/             # Módulo de postagens (CRUD, curtidas, comentários)
+├── comments/          # Módulo de comentários
+├── common/            # Funções utilitárias e filtros globais
+├── config/            # Configurações de ambiente e integração com S3
+├── database/          # Configuração do Mongoose e conexão com MongoDB
+└── main.ts            # Arquivo principal
+```
 
-### Passo 8: **Frontend com Vue.js ou React**
-   - **Tela de Login e Registro**: Crie as páginas de autenticação e integre com o backend.
-   - **Feed de Posts**: Exiba o feed com posts e as reações de cada um.
-   - **Sistema de Reação**: Adicione botões de reações e mostre os contadores de reações positivas e negativas.
-   - **Comentários**: Permita que os usuários comentem em posts e visualizem os comentários em tempo real.
+---
 
-### Passo 9: **Moderação e Controle de Conteúdo**
-   - **Moderadores e Regras de Conteúdo**: Crie uma função de moderador para revisar postagens e comentários com muitas reações negativas.
-   - **Denúncia de Conteúdo**: Permita que os usuários denunciem postagens, que podem ser revisadas pelos moderadores.
+## 📖 **Documentação da API**
+A documentação pode ser acessada através do Swagger em:
+```
+http://localhost:<porta>/api
+```
 
-### Passo 10: **Teste e Implantação**
-   - **Testes Automatizados**: Implemente testes para as principais funcionalidades, como autenticação e sistema de reações.
-   - **Implantação no Servidor**: Configure um servidor para hospedar a aplicação, como no DigitalOcean, AWS ou Heroku.
-   - **Escalabilidade**: Se necessário, use Redis para caching e balanceamento de carga para escalar a aplicação.
+### **Endpoints Principais**
+#### Autenticação:
+- **POST** `/auth/register` - Registro de um novo usuário.
+- **POST** `/auth/login` - Login e obtenção de um token JWT.
 
-### Ferramentas e Tecnologias
-   - **Backend**: NestJS, TypeORM/Mongoose, Redis (cache)
-   - **Frontend**: Vue.js ou React
-   - **Banco de Dados**: PostgreSQL ou MongoDB
-   - **Hospedagem**: DigitalOcean, AWS ou Heroku
+#### Usuários:
+- **GET** `/users/:id` - Obter informações públicas de um usuário.
+- **PUT** `/users/me` - Atualizar perfil do usuário autenticado.
+
+#### Postagens:
+- **POST** `/posts` - Criar uma nova postagem.
+- **GET** `/posts` - Listar todas as postagens.
+- **PATCH** `/posts/:id` - Atualizar uma postagem existente.
+- **DELETE** `/posts/:id` - Excluir uma postagem.
+
+#### Curtidas e Comentários:
+- **POST** `/posts/:id/like` - Curtir ou descurtir uma postagem.
+- **POST** `/posts/:id/comments` - Adicionar um comentário.
+- **GET** `/posts/:id/comments` - Listar comentários de uma postagem.
+
+---
+
+## ⚙️ **Configuração e Execução**
+### **Pré-requisitos**
+1. Node.js (>= 16.x)
+2. MongoDB (local ou em nuvem)
+3. Conta AWS com um bucket S3 configurado
+
+### **Passos**
+1. Clone o repositório:
+   ```bash
+   git clone <url-do-repositorio>
+   cd echo-api
+   ```
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+3. Configure as variáveis de ambiente:
+   Crie um arquivo `.env` na raiz com as seguintes variáveis:
+   ```env
+   MONGO_URI=<sua-conexao-mongodb>
+   JWT_SECRET=<sua-chave-secreta>
+   AWS_ACCESS_KEY_ID=<sua-chave-aws>
+   AWS_SECRET_ACCESS_KEY=<sua-chave-secreta-aws>
+   S3_BUCKET_NAME=<nome-do-bucket>
+   ```
+4. Inicie o servidor:
+   ```bash
+   npm run start:dev
+   ```
+
+---
+
+## 📦 **Futuras Implementações**
+- Sistema de notificações em tempo real (WebSocket).
+- Integração com serviços de terceiros para análises de postagens.
+- Melhorias na performance e segurança.
+
+---
+
+## 💡 **Contribuição**
+Este projeto foi desenvolvido para fins de aprendizado. Contribuições são bem-vindas para melhorar a API e explorar novas funcionalidades!
+
+---
