@@ -37,14 +37,11 @@ A **Echo API** é uma API RESTful desenvolvida como parte do aprendizado de **Ne
 ## 🏗️ **Estrutura do Projeto**
 ```plaintext
 src/
-├── auth/              # Módulo de autenticação e geração de tokens
-├── users/             # Módulo de gerenciamento de usuários
-├── posts/             # Módulo de postagens (CRUD, curtidas, comentários)
-├── comments/          # Módulo de comentários
-├── common/            # Funções utilitárias e filtros globais
-├── config/            # Configurações de ambiente e integração com S3
-├── database/          # Configuração do Mongoose e conexão com MongoDB
-└── main.ts            # Arquivo principal
+├── configs/              # Módulo de configuração
+├── modules/             # Módulo de funcionalidades da aplicacao
+├── shared/             # Módulo compartilhados
+├── app.module.ts/          # Módulo global
+├── main.ts/            # main
 ```
 
 ---
